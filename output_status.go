@@ -65,4 +65,6 @@ func outputStatuses(statuses []Status) {
 
 		fmt.Printf("%-*s   %s[%s%s]   %s%s\n", maxPathWidth, status.Path, color, modifyCode, remoteCode, status.Branch, colorReset)
 	}
+
+	timber.Info("")
 }

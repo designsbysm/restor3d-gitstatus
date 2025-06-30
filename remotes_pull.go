@@ -18,7 +18,7 @@ func pull(path string, wg *sync.WaitGroup) {
 
 	if err := cmd.Run(); err != nil {
 		if exitErr, ok := err.(*exec.ExitError); ok {
-			if exitErr.ExitCode() < 1 {
+			if exitErr.ExitCode() > 1 {
 				timber.Error(path, err)
 			}
 		} else {

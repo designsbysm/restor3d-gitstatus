@@ -47,18 +47,19 @@ func outputStatuses(statuses []Status) {
 			modifyCode = "*"
 		}
 
-		if status.Remote == InSync {
+		switch status.Remote {
+		case InSync:
 			color = colorGreen
-		} else if status.Remote == LocalAhead {
+		case LocalAhead:
 			remoteCode = "↑"
 			color = colorPurple
-		} else if status.Remote == RemoteAhead {
+		case RemoteAhead:
 			remoteCode = "↓"
 			color = colorYellow
-		} else if status.Remote == Diverged {
+		case Diverged:
 			remoteCode = "*"
 			color = colorRed
-		} else if status.Remote == Gone {
+		case Gone:
 			remoteCode = "∅"
 			color = colorGray
 		}

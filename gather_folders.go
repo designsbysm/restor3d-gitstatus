@@ -23,7 +23,7 @@ func gatherFolders(src string, maxDepth int) (files []string, err error) {
 			return err
 		} else if dir.IsDir() && currentDepth > rootDepth+maxDepth || (strings.Contains(path, "node_modules")) {
 			return fs.SkipDir
-		} else if dir.IsDir() && (strings.Contains(path, ".git")) {
+		} else if dir.IsDir() && strings.Contains(path, ".git") {
 			if noRoot && filepath.Dir(path) == src {
 				return fs.SkipDir
 			}

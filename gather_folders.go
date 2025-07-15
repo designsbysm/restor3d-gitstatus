@@ -21,7 +21,7 @@ func gatherFolders(src string, maxDepth int) (files []string, err error) {
 
 		if err != nil {
 			return err
-		} else if dir.IsDir() && currentDepth > rootDepth+maxDepth || (strings.Contains(path, "node_modules")) {
+		} else if dir.IsDir() && currentDepth > rootDepth+maxDepth || strings.Contains(path, "node_modules") {
 			return fs.SkipDir
 		} else if dir.IsDir() && strings.Contains(path, ".git") {
 			if noRoot && filepath.Dir(path) == src {
@@ -31,6 +31,18 @@ func gatherFolders(src string, maxDepth int) (files []string, err error) {
 			files = append(files, filepath.Dir(path))
 
 			return fs.SkipDir
+		} else if dir.IsDir() {
+			gitDir := filepath.Join(path, ".git")
+
+			if info, err := os.Stat(gitDir); err == nil && !info.IsDir() {
+				if noRoot && path == src {
+					return fs.SkipDir
+				}
+
+				files = append(files, path)
+
+				return fs.SkipDir
+			}
 		}
 
 		return nil

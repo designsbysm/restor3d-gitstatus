@@ -35,6 +35,7 @@ func outputStatuses(statuses []Status) {
 
 	if len(filtered) == 0 {
 		timber.Info("All repos are clean and up to date.")
+		timber.Info("")
 		return
 	}
 

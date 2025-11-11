@@ -29,7 +29,7 @@ func pull(path string, wg *sync.WaitGroup) {
 	install := viper.GetBool("install")
 
 	if install {
-		cmd := exec.Command("npm", "isntall")
+		cmd := exec.Command("npm", "isntall", "--no-save")
 		cmd.Dir = path
 
 		if err := cmd.Run(); err != nil {
